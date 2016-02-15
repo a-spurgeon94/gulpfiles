@@ -1,0 +1,52 @@
+# PHP "devDependencies": {
+    "browser-sync": "~2.8.0",
+    "del": "~1.2.0",
+    "event-stream": "~3.3.1",
+    "gulp": "^3.8.8",
+    "gulp-autoprefixer": "~2.3.1",
+    "gulp-concat": "~2.6.0",
+    "gulp-cssnano": "~2.1.0",
+    "gulp-filter": "~3.0.0",
+    "gulp-flatten": "~0.1.1",
+    "gulp-inject": "~1.5.0",
+    "gulp-install": "~0.4.0",
+    "gulp-load-plugins": "~1.0.0-rc.1",
+    "gulp-notify": "~2.2.0",
+    "gulp-order": "~1.1.1",
+    "gulp-plumber": "~1.0.1",
+    "gulp-rename": "~1.2.2",
+    "gulp-sass": "^2.1.1",
+    "gulp-uglify": "~1.2.0",
+    "gulp-util": "~3.0.6",
+    "main-bower-files": "~2.9.0",
+    "require-dir": "~0.3.0",
+    "run-sequence": "~1.1.2"
+  }Setup
+
+## Breakdown
+
+### package.json
+
+    browser-sync
+    del
+    event-stream
+    main-bower-files
+    require-dir
+    run-sequence
+
+    gulp
+    gulp-autoprefixer
+    gulp-concat
+    gulp-cssnano
+    gulp-filter
+    gulp-flatten
+    gulp-inject
+    gulp-install
+    gulp-load-plugins
+    gulp-notify
+    gulp-order
+    gulp-plumber
+    gulp-rename
+    gulp-sass
+    gulp-uglify
+    gulp-util

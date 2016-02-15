@@ -19,6 +19,6 @@ gulp.task('browser-sync', function () {
 gulp.task('watch', function () {
     // Watch our desired assets for changes, and reload the page
     gulp.watch(config.paths.assets.js + "/**/*.js", ['scripts']).on('change', browserSync.reload);
-    gulp.watch(config.paths.assets.less + "/**/*.less", ['less']).on('change', browserSync.reload);
+    gulp.watch(config.paths.assets.sass + "/**/*.scss", ['sass']).on('change', browserSync.reload);
     gulp.watch(config.paths.views.root + "/**/*.php").on('change', browserSync.reload);
 });

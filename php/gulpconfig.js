@@ -4,10 +4,10 @@ var assets = 'resources/assets',
 
 module.exports = {
     browser: {
-        port: 4000,
+        port: 3000,
         proxy: {
             host: 'localhost',
-            port: 9000
+            port: 8000
         },
         reload: {
             delay: 500,
@@ -16,7 +16,7 @@ module.exports = {
         watch: [
             [assets + '/js/**/*.js'],
             [assets + '/css/**/*.css'],
-            [assets + '/less/**/*.less']
+            [assets + '/scss/**/*.scss']
         ]
     },
     extensions: {
@@ -38,7 +38,7 @@ module.exports = {
             root: assets,
             js: assets + '/js',
             css: assets + '/css',
-            less: assets + '/less',
+            sass: assets + '/sass',
             fonts: assets + '/fonts',
             images: assets + '/images'
         },

@@ -26,7 +26,7 @@ gulp.task('bower', function() {
         // Bower CSS Files
         .pipe(cssFilter)
         .pipe(plugins.concat('lib.css'))
-        .pipe(prod ? plugins.minifyCss() : plugins.util.noop())
+        .pipe(prod ? plugins.cssnano() : plugins.util.noop())
         .pipe(prod ? plugins.rename({suffix:'.min'}) : plugins.util.noop())
         .pipe(gulp.dest(config.paths.out.css))
         .pipe(cssFilter.restore)

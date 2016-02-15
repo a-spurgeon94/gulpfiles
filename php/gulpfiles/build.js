@@ -1,15 +1,15 @@
 var gulp = require("gulp");
-var sequence = require('run-sequence'); // Run gulp tasks in sequence
-var config = require('../gulpconfig'); // Load config file for paths and module exports
+var sequence = require('run-sequence');       // Run gulp tasks in sequence
+var config = require('../gulpconfig');        // Load config file for paths and module exports
 var plugins = require('gulp-load-plugins')(); // Load all gulp-* plugins ('gulp-' stripped)
-var es = require('event-stream'); // Construct pipes of streams of events
-var del = require('del'); // Delete files/folders
+var es = require('event-stream');             // Construct pipes of streams of events
+var del = require('del');                     // Delete files/folders
 
-var prod = !!plugins.util.env.production; // Whether production parameter was used (bool)
+var prod = !!plugins.util.env.production;     // Whether production parameter was used (bool)
 
 /*----------  Build Assets  ----------*/
 gulp.task('build', ['install'], function(cb) {
-  sequence('clean', 'bower', ['less', 'scripts', 'fonts', 'images'], ['inject'], cb);
+  sequence('clean', 'bower', ['sass', 'scripts', 'fonts', 'images'], ['inject'], cb);
 });
 
 /*----------  Auto install npm/bower packages  ----------*/
@@ -29,13 +29,13 @@ gulp.task('clean', function() {
   ]);
 });
 
-/*----------  Compile LESS  ----------*/
-gulp.task('less', function() {
+/*----------  Compile SASS  ----------*/
+gulp.task('sass', function() {
   // Error handler for Plumber
   var handleError = function(err) {
-    // Notify an error linting LESS. For example, syntax errors in LESS which would cause task failure
+    // Notify an error linting SASS. For example, syntax errors in sass which would cause task failure
     plugins.notify.onError({
-      title: 'Error Linting LESS',
+      title: 'Error Linting SASS',
       subtitle: '',
       message: err.message,
       sound: ''
@@ -43,40 +43,40 @@ gulp.task('less', function() {
     this.emit('end'); // When using Watch, this signals to end the errored task, otherwise the task hangs
   };
 
-  return gulp.src(config.paths.assets.less + '/app.less')
+  return gulp.src(config.paths.assets.sass + '/app.scss')
     .pipe(plugins.plumber({
       errorHandler: handleError
     })) // Prevent pipe breaking caused by errors from gulp plugins
-    .pipe(plugins.less()) // Compile LESS
-    .pipe(plugins.autoprefixer()) // Add prefixes
-    .pipe(prod ? plugins.minifyCss() : plugins.util.noop()) // Minify LESS, if Production
+    .pipe(plugins.sass())           // Compile SASS
+    .pipe(plugins.autoprefixer())   // Add prefixes
+    .pipe(prod ? plugins.cssnano() : plugins.util.noop()) // Minify SASS, if Production
     .pipe(prod ? plugins.rename({
       suffix: '.min'
-    }) : plugins.util.noop()) // Add the .min suffix, if Production
+    }) : plugins.util.noop())   // Add the .min suffix, if Production
     .pipe(gulp.dest(config.paths.out.css)); // Output to destination
 });
 
 /*----------  Concatenate Scripts  ----------*/
 gulp.task('scripts', function() {
   return gulp.src("resources/assets/js/*.js")
-    .pipe(plugins.concat('main.js')) // Concatenates javascript files
+    .pipe(plugins.concat('main.js'))   // Concatenates javascript files
     .pipe(prod ? plugins.uglify() : plugins.util.noop()) // Minify Javascript, if Production
     .pipe(prod ? plugins.rename({
       suffix: '.min'
-    }) : plugins.util.noop()) // Add the .min suffix, if Production
-    .pipe(gulp.dest(config.paths.out.js)); // Output to destination
+    }) : plugins.util.noop())   // Add the .min suffix, if Production
+    .pipe(gulp.dest(config.paths.out.js));  // Output to destination
 });
 
 /*----------  Output Fonts  ----------*/
 gulp.task('fonts', function() {
   return gulp.src(config.paths.assets.fonts + "/**/" + config.extensions.fonts)
-    .pipe(gulp.dest(config.paths.out.fonts))
+    .pipe(gulp.dest(config.paths.out.fonts));
 });
 
 /*----------  Output Images  ----------*/
 gulp.task('images', function() {
   return gulp.src(config.paths.assets.images + "/**/" + config.extensions.images)
-    .pipe(gulp.dest(config.paths.out.images))
+    .pipe(gulp.dest(config.paths.out.images));
 });
 
 /*----------  Inject Styles/Scripts  ----------*/
