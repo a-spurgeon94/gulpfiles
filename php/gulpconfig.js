@@ -16,7 +16,7 @@ module.exports = {
         watch: [
             [assets + '/js/**/*.js'],
             [assets + '/css/**/*.css'],
-            [assets + '/scss/**/*.scss']
+            [assets + '/sass/**/*.scss']
         ]
     },
     extensions: {

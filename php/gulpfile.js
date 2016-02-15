@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var sequence = require('run-sequence');     // Run gulp tasks in sequence
-require('require-dir')('./gulp_files');     // Require all gulp files in directory
+require('require-dir')('./gulpfiles');     // Require all gulp files in directory
 
 /*----------  Start Gulp  ----------*/
 gulp.task('default', function(cb) {
